@@ -1,0 +1,14 @@
+{% if courses %}
+            {% for course in courses %}
+                <div class="course">
+                    <img src="{{ course.photo.url }}" alt="{{ course.title }}">
+                    <h1>{{ course.title }}</h1>
+                    <p class="course-description">
+                        {{ course.description|truncatechars:140 }}
+                    </p>
+                    <p><a href="#">Voir le cours</a></p>
+                </div>
+            {% endfor %}
+{% else %}
+            <h1>Désolé, nous n'avons trouvé aucun cours.</h1>
+{% endif %}

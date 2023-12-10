@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block navbar_add %}
+    <form action="{% url 'courses:search-course' %}" method="get">
+        {% csrf_token %}
+        <input autofocus type="search" name="search-course" id="search-course" placeholder="Chercher un cours ...">
+        <input type="submit" value="Chercher">
+    </form>
+{% endblock navbar_add %}
+
+{% block content %}
+        <nav id="theme-list">
+            <ul>
+                {% for subject in subjects %}
+                    <li><a href="{% url 'courses:course-by-subject' subject.pk %}">{{ subject.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <div id="course-container">
+            {% include 'courses/partials/course-list.html' %}
+        </div>
+        <div class="pagination-container">
+            <ul class="pagination-list">
+                {% if courses.has_previous %}
+                {% if q %}
+                <li class="pagination-element"><a href="?search-course={{ q }}&page={{ courses.previous_page_number }}" class="pagination-link">Précédent</a></li>
+                {% else %}
+                <li class="pagination-element"><a href="?page={{ courses.previous_page_number }}" class="pagination-link">Précédent</a></li>
+                {% endif %}
+                {% endif %}
+                {% if courses.has_next %}
+                {% if q %}
+                <li class="pagination-element"><a href="?search-course={{ q }}&page={{ courses.next_page_number }}" class="pagination-link">Suivant</a></li>
+                {% else %}
+                <li class="pagination-element"><a href="?page={{ courses.next_page_number }}" class="pagination-link">Suivant</a></li>
+                {% endif %}
+                {% endif %}
+            </ul>
+        </div>
+{% endblock content %}

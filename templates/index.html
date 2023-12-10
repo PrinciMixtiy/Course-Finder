@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div class="general-main">
+            <div class="left-div">
+                <h1 class="title-xl">Course Finder</h1>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus asperiores quasi, voluptate alias unde tempore reiciendis quo repudiandae laborum architecto excepturi, sequi rem aspernatur exercitationem itaque nisi ipsa numquam ipsum.
+                </p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'courses:courses' %}" class="big-button">Voir les cours</a>
+                {% else %}
+                <a class="big-button" href="{% url 'accounts:sign-up' %}">S'inscrire</a>
+                {% endif %}
+            </div>
+            <div class="right-div">
+                <h1>Notre dernier cours</h1>
+                <div class="course">
+                    <img src="{{ last_course.photo.url }}" alt="{{ last_course.title }}">
+                    <h1>{{ last_course.title }}</h1>
+                    <p>
+                        {{ last_course.description|truncatechars:160 }}
+                    </p>
+                    <p><a href="#">Voir Le cours</a></p>
+                </div>
+            </div>
+        </div>
+{% endblock content %}

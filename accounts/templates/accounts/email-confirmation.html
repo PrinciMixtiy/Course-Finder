@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <form class="form-block" action="" method="post">
+            {% csrf_token %}
+            <h1>Confirmation de votre Email</h1>
+            <p>
+                Veuillez saisir le code que nous avons envoyez à votre addresse email pour confirmer votre identiter. Le code n'est valide que pendant 1h.
+            </p>
+            <input autofocus type="text" name="code" id="code" placeholder="XXXXXX" required>
+            <input type="submit" value="Terminer">
+            <p><a href="{% url 'accounts:add-user-email' %}">Réenvoyer le code</a></p>
+        </form>
+{% endblock content %}

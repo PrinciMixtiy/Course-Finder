@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    {% block head_add %}{% endblock head_add %}
+    <title>Find Courses</title>
+    <script src="{% static 'js/htmx.min.js' %}"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div>
+                <img src="{% static 'images/favicon.ico' %}" alt="Course Finder Icon">
+            </div>
+            <ul class="nav-list">
+                <li><a class="nav-link" href="{% url 'home' %}">Accueil</a></li>
+                <li><a class="nav-link" href="{% url 'courses:courses' %}">Cours</a></li>
+                {% if user.is_authenticated %}
+                <li><a class="nav-link" href="{% url 'accounts:sign-out' %}">Déconnexion</a></li>
+                <li><a href=""><img class="user-profile" src="{% if user.avatar %}{{ user.avatar.url }}{% else %}{% static 'images/user.png' %}{% endif %}" alt="{{ user.username }}"></a></li>
+                {% else %}
+                <li><a class="nav-link" href="{% url 'accounts:sign-in' %}">Connexion</a></li>
+                <li><a class="nav-link" href="{% url 'accounts:sign-up' %}">Inscritption</a></li>
+                {% endif %}
+            </ul>
+            {% block navbar_add %}
+            {% endblock navbar_add %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <footer>
+        <div>
+            <ul>
+                <li><a href="#">Email: findcourse@gmail.com</a></li>
+                <li><a href="#">Tel: 034 98 686 28</a></li>
+            </ul>
+        </div>
+        <div>
+            <h1>&copy; Course Finder {% if current_year %}{{ current_year }}{% endif %}</h1>
+        </div>
+        <div>
+            <ul>
+                <li><a href="{% url 'home' %}">Acceuil</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'accounts:sign-out' %}">Déconnexion</a></li>
+                <li><a href="#">Profile</a></li>
+                {% else %}
+                <li><a href="{% url 'accounts:sign-in' %}">Connexion</a></li>
+                <li><a href="{% url 'accounts:sign-up' %}">Inscription</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

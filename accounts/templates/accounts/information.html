@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <form class="form-block" action="{% url 'accounts:add-user-info' %}" method="post">
+            {% csrf_token %}
+            <h1>Vos informations</h1>
+            <label for="last-name">Nom</label>
+            <input autofocus type="text" name="last-name" id="last-name" required>
+            <label for="first-name">Prénom</label>
+            <input type="text" name="first-name" id="first-name" required>
+            <label for="birth-date">Date de naissance</label>
+            <input type="date" name="birth-date" id="birth-date" required>
+            <input type="submit" value="Suivant">
+            <p><a href="{% url 'accounts:add-user-email' %}">Sauter</a></p>
+        </form>
+{% endblock content %}

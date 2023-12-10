@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <form class="form-block" action="{% url 'accounts:add-user-email' %}" method="post">
+            {% csrf_token %}
+            <h1>Addresse Electronique</h1>
+            {% if error %}
+                <p class="error">{{ error|safe }}</p>
+            {% endif %}
+            <p>
+                Pour nous aider à vous tenir au courant des nouveaux cours qui vont sortir, veuillez enregistrer ci-dessous votre addresse email.
+            </p>
+            <input autofocus type="email" name="email" id="email" placeholder="compte@domain.com" required>
+            <input type="submit" value="Suivant">
+            <p><a href="{% url 'accounts:add-user-level' %}">Sauter</a></p>
+        </form>
+{% endblock content %}

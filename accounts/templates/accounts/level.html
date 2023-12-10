@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <form class="form-block" action="{% url 'accounts:add-user-level' %}" method="post">
+            {% csrf_token %}
+            <h1>Addresse Electronique</h1>
+            <p>
+                Pour nous aider à vous tenir au courant des nouveaux cours qui vont sortir, veuillez enregistrer ci-dessous votre addresse email.
+            </p>
+            <select name="level" id="level">
+                <option value="U" selected>Université</option>
+                <option value="L">Lycée</option>
+                <option value="C">Collège</option>
+            </select>
+            <input type="submit" value="Terminer">
+        </form>
+{% endblock content %}

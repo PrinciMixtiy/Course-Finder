@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <form class="form-block" action="{% url 'accounts:sign-up' %}" method="post">
+            {% csrf_token %}
+            <h1>Inscritption</h1>
+            {% if error %}
+                <p class="error">{{ error|safe }}</p>
+            {% endif %}
+            <label for="username">Nom d'utilisateur</label>
+            <input autofocus type="text" name="username" id="username">
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" id="password">
+            <input type="submit" value="Suivant">
+            <p class="notification">Vous avez déja un compte? <a href="{% url 'accounts:sign-in' %}">Se connecter</a></p>
+        </form>
+{% endblock content %}
